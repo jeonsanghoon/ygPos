@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mrc.yg.api.domain.device.mapper.DeviceLogMapper">
+    <select id="getList"
+            parameterType="com.mrc.yg.api.domain.device.dto.DeviceLogDtoReq"
+            resultType="com.mrc.yg.api.domain.device.dto.DeviceLogDto">
+        SELECT *
+          FROM DEVICE_LOG
+
+    </select>
+    <insert id="insert" keyProperty="logCode" parameterType="com.mrc.yg.api.domain.device.dto.DeviceLogDto">
+        INSERT INTO DEVICE_LOG
+        (
+            LOG_CODE,    DEVICE_CODE, DEVICE_SN,   DEVICE_STATUS,
+            SW_NAME,     SW_VERSION,  LOGIN_TIME,  REMARK,
+            INSERT_CODE, INSERT_DATE, UPDATE_CODE ,UPDATE_DATE
+        )
+        SELECT #{logCode},    #{deviceCode},  #{deviceSn},   #{deviceStatus},
+               #{swName},     #{swVersion},   current_timestamp(),  #{remark},
+               #{insertCode},  current_timestamp(), #{updateCode},  current_timestamp()
+        <selectKey resultType="long"  keyProperty="logCode" order="AFTER">
+            SELECT LAST_INSERT_ID() as logCode;
+        </selectKey>
+    </insert>
+</mapper>

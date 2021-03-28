@@ -10,20 +10,20 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class DeviceLoginLogDto implements Serializable {
+public class DeviceLogDto implements Serializable {
     private	Long logCode;
     private	String deviceCode;
-    private	String device_sn;
-    private	String device_status;
-    private	String sw_name;
-    private	String sw_version;
+    private	String deviceSn;
+    private	int deviceStatus;
+    private	String swName;
+    private	String swVersion;
     private	String remark;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    private	LocalDateTime login_time = LocalDateTime.now();
-    private	int insert_code = 1;
+    private	LocalDateTime loginTime = LocalDateTime.now();
+    private	int insertCode = 1;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    private	LocalDateTime insert_date = LocalDateTime.now();
-    private	int update_code = 1;
+    private	LocalDateTime insertDate = LocalDateTime.now();
+    private	int updateCode = 1;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime update_date = LocalDateTime.now();
+    private LocalDateTime updateDate = LocalDateTime.now();
 }

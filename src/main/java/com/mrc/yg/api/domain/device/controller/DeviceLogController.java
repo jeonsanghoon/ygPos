@@ -1,9 +1,9 @@
 package com.mrc.yg.api.domain.device.controller;
 
 import com.mrc.yg.api.base.BaseController;
-import com.mrc.yg.api.domain.device.dto.DeviceLoginLogDto;
-import com.mrc.yg.api.domain.device.dto.DeviceLoginLogDtoReq;
-import com.mrc.yg.api.domain.device.service.DeviceLoginLogService;
+import com.mrc.yg.api.domain.device.dto.DeviceLogDto;
+import com.mrc.yg.api.domain.device.dto.DeviceLogDtoReq;
+import com.mrc.yg.api.domain.device.service.DeviceLogService;
 import com.mrc.yg.api.util.dto.RtnData;
 import io.swagger.annotations.Api;
 import org.apache.commons.logging.Log;
@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Api(tags = "Device Login Log")
+@Api(tags = "기기로그인")
 @RequestMapping("/v1/device/loginLog")
 @RestController
-public class DeviceLoginLogController implements BaseController<DeviceLoginLogDtoReq, DeviceLoginLogDto> {
+public class DeviceLogController implements BaseController<DeviceLogDtoReq, DeviceLogDto> {
 
-    private final DeviceLoginLogService<DeviceLoginLogDtoReq, DeviceLoginLogDto> service;
+    private final DeviceLogService<DeviceLogDtoReq, DeviceLogDto> service;
     private final Log log;
-    public DeviceLoginLogController(DeviceLoginLogService<DeviceLoginLogDtoReq, DeviceLoginLogDto> deviceService) {
+    public DeviceLogController(DeviceLogService<DeviceLogDtoReq, DeviceLogDto> deviceService) {
         this.service = deviceService;
         log = LogFactory.getLog(getClass());
     }
@@ -27,26 +27,26 @@ public class DeviceLoginLogController implements BaseController<DeviceLoginLogDt
     @PostMapping("/getList")
     @ResponseBody
     @Override
-    public RtnData<List<DeviceLoginLogDto>> getList(@RequestBody DeviceLoginLogDtoReq req) {
+    public RtnData<List<DeviceLogDto>> getList(@RequestBody DeviceLogDtoReq req) {
         log.info(req.toString());
         return service.getList(req);
     }
 
     @PostMapping("/save")
     @Override
-    public RtnData<String> save(DeviceLoginLogDto data) {
-        return service.save(data);
+    public RtnData<String> save(@RequestBody DeviceLogDto data) {
+        return service.insert(data);
     }
 
     @PostMapping("/update")
     @Override
-    public RtnData<String> update(DeviceLoginLogDto data) {
+    public RtnData<String> update(DeviceLogDto data) {
         return service.update(data);
     }
 
     @PostMapping("/delete")
     @Override
-    public RtnData<String> delete(DeviceLoginLogDto data) {
+    public RtnData<String> delete(DeviceLogDto data) {
         return service.delete(data);
     }
 }

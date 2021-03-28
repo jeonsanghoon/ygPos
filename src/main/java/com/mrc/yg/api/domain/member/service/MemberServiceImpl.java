@@ -15,7 +15,7 @@ public class MemberServiceImpl implements MemberService<MemberDtoReq, MemberDto>
     }
 
     @Override
-    public RtnData<String> save(MemberDto data) {
+    public RtnData<String> insert(MemberDto data) {
         return null;
     }
 

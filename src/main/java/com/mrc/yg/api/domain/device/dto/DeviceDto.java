@@ -20,10 +20,10 @@ public class DeviceDto implements Serializable {
     private	String remark;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime login_time = LocalDateTime.now();
-    private	int insert_code = 1;
+    private	int insertCode = 1;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    private	LocalDateTime insert_date = LocalDateTime.now();
-    private	int update_code = 1;
+    private	LocalDateTime insertDate = LocalDateTime.now();
+    private	int updateCode = 1;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime update_date = LocalDateTime.now();
+    private LocalDateTime updateDate = LocalDateTime.now();
 }

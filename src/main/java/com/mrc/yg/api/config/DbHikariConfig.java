@@ -44,7 +44,8 @@ public class DbHikariConfig {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource);
         sqlSessionFactoryBean.setMapperLocations(
-                applicationContext.getResources("classpath:/com/mrc/yg/api/domain/**/*.xml")
+                //applicationContext.getResources("classpath:/com/mrc/yg/api/domain/**/*.xml")
+               applicationContext.getResources("classpath:/com/mrc/yg/api/domain/**/*.xml")
         );
         /**
          * 카멜 표기법 적용

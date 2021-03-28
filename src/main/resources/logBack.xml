@@ -8,7 +8,7 @@ jdbc.connection : Logs connection open and close events
 -->
 <configuration>
     <!-- 	<property name="LOG_HOME" value="/home/ippa/log" /> -->
-    <property name="LOG_HOME" value="/home/office/assignment/logs" />
+    <property name="LOG_HOME" value="/home/office/api/logs" />
 
     <property name="LOG_PATTERN" value="[%d{yyyy-MM-dd HH:mm:ss}] [%thread] %-5level %logger{36} - %msg%n" />
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
