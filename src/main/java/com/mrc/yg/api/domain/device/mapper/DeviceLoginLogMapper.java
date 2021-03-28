@@ -8,6 +8,6 @@ import java.util.List;
 
 @Mapper
 public interface DeviceLoginLogMapper {
-    List<DeviceLoginLogDto> getDeviceLogList(DeviceLoginLogDtoReq req);
+    List<DeviceLoginLogDto> getList(DeviceLoginLogDtoReq req);
     void insert(DeviceLoginLogDto data);
 }

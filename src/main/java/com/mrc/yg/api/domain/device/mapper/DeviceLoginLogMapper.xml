@@ -5,9 +5,18 @@
             parameterType="com.mrc.yg.api.domain.device.dto.DeviceLoginLogDtoReq"
             resultType="com.mrc.yg.api.domain.device.dto.DeviceLoginLogDto">
         SELECT *
-        FROM DEVICE_LOGIN_LOG
+          FROM DEVICE_LOGIN_LOG
+
     </select>
     <insert id="insert" parameterType="com.mrc.yg.api.domain.device.dto.DeviceLoginLogDto">
-
+        INERT INTO DEVICE_LOGIN_LOG
+        (
+            LOG_CODE,    DEVICE_CODE, DEVICE_SN,   DEVICE_STATUS,
+            SW_NAME,     SW_VERSION,  LOGIN_TIME,  REMARK,
+            INSERT_CODE, INSERT_DATE, UPDATE_CODE ,UPDATE_DATE
+        )
+        SELECT #{logCode},    #{deviceCode},  #{deviceSn},   #{deviceStatus},
+               #{swName},     #{swVersion},   #{loginTime},  #{remark},
+               #{insertCode}, #{insertDate}, #{updateCode}, #{updateDate}
     </insert>
 </mapper>

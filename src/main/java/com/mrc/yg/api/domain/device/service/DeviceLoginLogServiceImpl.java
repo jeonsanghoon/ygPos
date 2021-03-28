@@ -22,7 +22,7 @@ public class DeviceLoginLogServiceImpl implements DeviceLoginLogService<DeviceLo
     public RtnData<List<DeviceLoginLogDto>> getList(DeviceLoginLogDtoReq req) {
         RtnData<List<DeviceLoginLogDto>> rtn = new RtnData<>();
         try {
-            List<DeviceLoginLogDto> list = mapper.getDeviceLogList(req);
+            List<DeviceLoginLogDto> list = mapper.getList(req);
             rtn.setData(list);
         }catch(Exception e){
             rtn.setRtnType(RtnType.ERROR);

@@ -43,7 +43,9 @@ public class DbHikariConfig {
     public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource);
-     //   sqlSessionFactoryBean.setMapperLocations(applicationContext.getResources("classpath:/mybatis/mapper/**/*.xml"));
+        sqlSessionFactoryBean.setMapperLocations(
+                applicationContext.getResources("classpath:/com/mrc/yg/api/domain/**/*.xml")
+        );
         /**
          * 카멜 표기법 적용
          */

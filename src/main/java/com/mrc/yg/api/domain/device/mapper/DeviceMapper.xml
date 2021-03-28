@@ -7,7 +7,5 @@
         SELECT *
           FROM DEVICE
     </select>
-    <insert id="insert" parameterMap="com.mrc.yg.api.domain.device.dto.DeviceDto">
 
-    </insert>
 </mapper>
