@@ -6,6 +6,7 @@ import com.mrc.yg.api.domain.device.mapper.DeviceLogMapper;
 import com.mrc.yg.api.util.dto.RtnData;
 import com.mrc.yg.api.util.dto.RtnType;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class DeviceLogServiceImpl implements DeviceLogService<DeviceLogDtoReq, D
         return rtn;
     }
 
-
+    @Transactional
     @Override
     public RtnData<String> insert(DeviceLogDto data) {
         RtnData<String> rtn = new RtnData<>();

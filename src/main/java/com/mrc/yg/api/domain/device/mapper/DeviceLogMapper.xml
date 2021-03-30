@@ -6,8 +6,19 @@
             resultType="com.mrc.yg.api.domain.device.dto.DeviceLogDto">
         SELECT *
           FROM DEVICE_LOG
-
+        <where>
+            <if test="logCode != null ">
+                and LOG_CODE = #{logCode}
+            </if>
+            <if test="deviceCode != null ">
+                and DEVICE_CODE = #{deviceCode}
+            </if>
+            <if test="deviceSn != null ">
+                and DEVICE_SN = #{deviceSn}
+            </if>
+        </where>
     </select>
+
     <insert id="insert" keyProperty="logCode" parameterType="com.mrc.yg.api.domain.device.dto.DeviceLogDto">
         INSERT INTO DEVICE_LOG
         (

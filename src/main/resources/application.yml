@@ -1,13 +1,18 @@
 server:
-  port: 8020
+  port: 8010
 
 spring:
   datasource:
-
     hikari:
       driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
       jdbc-url: jdbc:log4jdbc:mysql://118.128.43.7:55306/ygpos?serverTimezone=UTC&characterEncoding=UTF-8&allowMultiQueries=true
       username: root
       password: admin1234
-
-#mybatis.mapper-locations: classpath:mybatis/mapper/**/**.xml
+  rabbitmq:
+    host: localhost # rabbitMQ host (docker로 띄웠음)
+    port: 5672 # default port
+    username: username # default username
+    password: password # default password
+config:
+  app:
+    duration: 10000

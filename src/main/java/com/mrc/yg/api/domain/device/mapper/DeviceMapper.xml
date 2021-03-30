@@ -6,12 +6,15 @@
             resultType="com.mrc.yg.api.domain.device.dto.DeviceDto">
         SELECT *
           FROM DEVICE
-
-
-
         <where>
             <if test="deviceCode != null ">
-                and device_code = #{deviceCode}
+                and DEVICE_CODE = #{deviceCode}
+            </if>
+            <if test="deviceSn != null ">
+                and DEVICE_SN = #{deviceSn}
+            </if>
+            <if test="isActive != null ">
+                and IS_ACTIVE = #{isActive}
             </if>
         </where>
     </select>

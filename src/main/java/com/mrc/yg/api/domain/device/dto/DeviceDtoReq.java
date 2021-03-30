@@ -12,4 +12,5 @@ import java.io.Serializable;
 public class DeviceDtoReq implements Serializable {
     private	String deviceCode;
     private	String deviceSn;
+    private	Boolean isActive;
 }
