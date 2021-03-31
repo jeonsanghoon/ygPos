@@ -33,6 +33,7 @@ public class ReceiverConfig {
                 , MessageListenerAdapter listenerAdapter) {
         SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
         container.setConnectionFactory(connectionFactory);
+
         container.setQueueNames(RabbitMqConstants.QUEUE_NAME);
         container.setMessageListener(listenerAdapter); return container;
     }
