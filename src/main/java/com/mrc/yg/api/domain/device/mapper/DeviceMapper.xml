@@ -16,6 +16,53 @@
             <if test="isActive != null ">
                 and IS_ACTIVE = #{isActive}
             </if>
+            <if test="deviceName != null ">
+                and DEVICE_NAME = #{deviceName}
+            </if>
         </where>
     </select>
+    <insert id="insert" keyProperty="deviceCode" parameterType="com.mrc.yg.api.domain.device.dto.DeviceDto">
+        INSERT INTO DEVICE
+        (
+              DEVICE_CODE, DEVICE_SN,   DEVICE_NAME, ADDRESS, ADDRESS_DETAIL
+            , LATITUDE,    LONGITUDE,   IS_ACTIVE,   REMARK
+            , INSERT_CODE, INSERT_DATE, UPDATE_CODE, UPDATE_DATE
+        )
+        SELECT #{deviceCode},  #{deviceSn},  #{deviceName}, #{address}, #{addressDetail},
+               #{latitude},    #{longitude}, #{isActive},    #{remark},
+               #{insertCode},  current_timestamp(), #{updateCode},  current_timestamp()
+        <selectKey resultType="long"  keyProperty="deviceCode" order="AFTER">
+            SELECT LAST_INSERT_ID() as deviceCode;
+        </selectKey>
+    </insert>
+
+    <update id="update"  parameterType="com.mrc.yg.api.domain.device.dto.DeviceDto">
+        UPDATE DEVICE
+            SET DEVICE_SN      = #{deviceSn},
+                DEVICE_STATUS  = #{deviceStatus},
+                DEVICE_NAME    = #{deviceName},
+                ADDRESS        = #{address},
+                ADDRESS_DETAIL = #{addressDetail},
+                LATITUDE       = #{latitude},
+                LONGITUDE      = #{longitude},
+                IS_ACTIVE      = #{isActive},
+                REMARK         = #{REMARK},
+                UPDATE_CODE    = #{updateCode},
+                UPDATE_DATE    = current_timestamp()
+        WHERE DEVICE_CODE  = #{deviceCode}
+    </update>
+    <delete id="delete"  parameterType="com.mrc.yg.api.domain.device.dto.DeviceDto">
+        DELETE DEVICE
+        <where>
+            <if test="deviceCode == null and deviceName = null ">
+                and 1=0
+            </if>
+            <if test="deviceCode != null ">
+                and DEVICE_CODE = #{deviceCode}
+            </if>
+            <if test="deviceName != null ">
+                and DEVICE_SN = #{deviceSn}
+            </if>
+        </where>
+    </delete>
 </mapper>

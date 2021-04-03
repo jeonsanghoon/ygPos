@@ -2,7 +2,7 @@ package com.mrc.yg.api.domain.member.service;
 
 import com.mrc.yg.api.domain.member.dto.MemberDto;
 import com.mrc.yg.api.domain.member.dto.MemberDtoReq;
-import com.mrc.yg.api.util.dto.RtnData;
+import com.mrc.yg.api.framework.util.dto.RtnData;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

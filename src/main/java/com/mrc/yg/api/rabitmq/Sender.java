@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
-@Component
+//@Component
 public class Sender {
     @Autowired
     private RabbitTemplate template;

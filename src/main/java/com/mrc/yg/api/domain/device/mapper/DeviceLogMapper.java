@@ -10,4 +10,6 @@ import java.util.List;
 public interface DeviceLogMapper {
     List<DeviceLogDto> getList(DeviceLogDtoReq req);
     void insert(DeviceLogDto data);
+    void update(DeviceLogDto data);
+    void delete(DeviceLogDto data);
 }

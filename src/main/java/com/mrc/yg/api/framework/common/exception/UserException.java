@@ -1,4 +1,4 @@
-package com.mrc.yg.api.util.exception;
+package com.mrc.yg.api.framework.common.exception;
 
 
 public class UserException extends Exception {

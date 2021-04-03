@@ -1,16 +1,15 @@
 package com.mrc.yg.api.domain.device.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.io.Serializable;
 
 @Getter
 @Setter
-@ToString
-public class DeviceLogDtoReq implements Serializable {
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class DeviceLogDtoReq {
     private	Long logCode;
     private	String deviceCode;
-    private	String device_sn;
+    private	String deviceSn;
 }

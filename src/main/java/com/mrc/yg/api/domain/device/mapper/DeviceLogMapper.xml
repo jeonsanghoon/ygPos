@@ -33,4 +33,35 @@
             SELECT LAST_INSERT_ID() as logCode;
         </selectKey>
     </insert>
+
+    <update id="update"  parameterType="com.mrc.yg.api.domain.device.dto.DeviceLogDto">
+        UPDATE DEVICE_LOG
+           SET DEVICE_CODE   = #{deviceCode},
+               DEVICE_SN     = #{deviceSn},
+               DEVICE_STATUS = #{deviceStatus},
+               SW_NAME       = #{swName},
+               SW_VERSION    = #{SW_VERSION},
+               LOGIN_TIME    = #{loginTime},
+               REMARK        = #{REMARK},
+               UPDATE_CODE   = #{updateCode},
+               UPDATE_DATE   = current_timestamp(),
+         WHERE LOG_CODE      = #{logCode}
+    </update>
+    <delete id="delete"  parameterType="com.mrc.yg.api.domain.device.dto.DeviceLogDto">
+        DELETE DEVICE_LOG
+        <where>
+            <if test="logCode == null and deviceCode = null and deviceSn == null ">
+                and 1=0
+            </if>
+            <if test="logCode != null ">
+                and LOG_CODE = #{logCode}
+            </if>
+            <if test="deviceCode != null ">
+                and DEVICE_CODE = #{deviceCode}
+            </if>
+            <if test="deviceSn != null ">
+                and DEVICE_SN = #{deviceSn}
+            </if>
+        </where>
+    </delete>
 </mapper>

@@ -1,4 +1,4 @@
-package com.mrc.yg.api.config;
+package com.mrc.yg.api.framework.config;
 
 
 import com.zaxxer.hikari.HikariConfig;

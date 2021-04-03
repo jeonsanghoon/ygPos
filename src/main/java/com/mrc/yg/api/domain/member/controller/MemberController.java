@@ -1,36 +1,51 @@
 package com.mrc.yg.api.domain.member.controller;
 
-import com.mrc.yg.api.base.BaseController;
+import com.mrc.yg.api.domain.member.service.MemberService;
+import com.mrc.yg.api.framework.base.BaseController;
 
-import com.mrc.yg.api.util.dto.RtnData;
+import com.mrc.yg.api.framework.util.dto.RtnData;
 import com.mrc.yg.api.domain.member.dto.MemberDto;
 import com.mrc.yg.api.domain.member.dto.MemberDtoReq;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/member")
+@Api(tags = "회원")
+@RequestMapping("/v1/member")
 @RestController
 public class MemberController implements BaseController<MemberDtoReq,MemberDto> {
-    @Override
-    public RtnData<List<MemberDto>> getList(MemberDtoReq memberDtoReq) {
-        return null;
+    private final MemberService<MemberDtoReq, MemberDto> service;
+    public MemberController(MemberService<MemberDtoReq, MemberDto> service) {
+        this.service = service;
     }
 
+    @ApiOperation(value = "회원 조회", notes = "회원 조회입니다.")
+    @PostMapping("/getList")
     @Override
-    public RtnData<String> update(MemberDto data) {
-        return null;
+    public RtnData<List<MemberDto>> getList(@RequestBody MemberDtoReq req) {
+        return service.getList(req);
     }
 
+    @ApiOperation(value = "회원 저장", notes = "회원 저장입니다.")
+    @PostMapping("/save")
     @Override
-    public RtnData<String> delete(MemberDto data) {
-        RtnData<String> rtn = new RtnData<>();
-
-        return rtn;
+    public RtnData<String> save(@RequestBody MemberDto data) {
+        return service.insert(data);
+    }
+    
+    @ApiOperation(value = "회원 수정", notes = "회원 저장입니다.")
+    @PostMapping("/update")
+    @Override
+    public RtnData<String> update(@RequestBody MemberDto data) {
+        return service.update(data);
     }
 
-    public RtnData<String> save(MemberDto data) {
-        return null;
+    @ApiOperation(value = "회원 삭제", notes = "회원 삭제입니다.")
+    @PostMapping("/delete")
+    @Override
+    public RtnData<String> delete(@RequestBody MemberDto data) {
+        return service.delete(data);
     }
 }

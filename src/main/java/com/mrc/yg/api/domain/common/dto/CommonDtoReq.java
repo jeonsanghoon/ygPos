@@ -6,4 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CommonDtoReq {
+    private Integer commonCode;
+    private String mainCode;
+    private Integer subCode;
 }

@@ -13,6 +13,8 @@ spring:
     port: 5672 # default port
     username: username # default username
     password: password # default password
+  jwt:
+    secret: ygpos!@34
 config:
   app:
     duration: 10000

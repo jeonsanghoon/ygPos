@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mrc.yg.api.domain.member.mapper.MemberMapper">
+    <select id="getList"
+            parameterType="com.mrc.yg.api.domain.member.dto.MemberDtoReq"
+            resultType="com.mrc.yg.api.domain.member.dto.MemberDto">
+        SELECT *
+          FROM MEMBER
+        <where>
+            <if test="memberCode != null ">
+                and MEMBER_CODE = #{memberCode}
+            </if>
+            <if test="memberId != null ">
+                and MEMBER_ID = #{memberId}
+            </if>
+            <if test="memberName != null ">
+                and MEMBER_NAME = #{memberName}
+            </if>
+
+        </where>
+    </select>
+    <insert id="insert" keyProperty="memberCode" parameterType="com.mrc.yg.api.domain.member.dto.MemberDto">
+        INSERT INTO MEMBER
+        (
+           MEMBER_CODE, MEMBER_ID,   MEMBER_NAME, NICKNAME,   MEMBER_PW,
+           AUTH_TYPE,   MEMBER_IMG,  PHONE,       BIRTH_DATE, HIDE,
+           INSERT_CODE, INSERT_DATE, UPDATE_CODE, UPDATE_DATE
+        )
+        SELECT #{memberCode}, #{memberId},   #{memberName}, #{nickname},   #{memberPw},
+               #{authType},   #{memberImg},  #{phone},       #{birthDate}, #{hide},
+               #{insertCode},  current_timestamp(), #{updateCode},  current_timestamp()
+        <selectKey resultType="long"  keyProperty="memberCode" order="AFTER">
+            SELECT LAST_INSERT_ID() as memberCode;
+        </selectKey>
+    </insert>
+
+    <update id="update"  parameterType="com.mrc.yg.api.domain.member.dto.MemberDto">
+        UPDATE MEMBER
+           SET MEMBER_ID   = #{memberId},
+               MEMBER_NAME = #{memberName},
+               NICKNAME    = #{nickname},
+               MEMBER_PW   = #{memberPw},
+               AUTH_TYPE   = #{authType},
+               MEMBER_IMG  = #{memberImg},
+               PHONE       = #{phone},
+               BIRTH_DATE  = #{BirthDate},
+               HIDE        = #{hide}
+               UPDATE_CODE = #{updateCode},
+               UPDATE_DATE = current_timestamp()
+         WHERE MEMBER_CODE = #{memberCode}
+    </update>
+    <delete id="delete"  parameterType="com.mrc.yg.api.domain.member.dto.MemberDto">
+        DELETE MEMBER
+        <where>
+            <if test="memberCode == null and memberName = null ">
+                and 1=0
+            </if>
+            <if test="memberCode != null ">
+                and MEMBER_CODE = #{memberCode}
+            </if>
+            <if test="memberName != null ">
+                and MEMBER_SN = #{memberSn}
+            </if>
+        </where>
+    </delete>
+</mapper>

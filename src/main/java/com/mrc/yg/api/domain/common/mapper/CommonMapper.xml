@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mrc.yg.api.domain.common.mapper.CommonMapper">
+    <select id="getList"
+            parameterType="com.mrc.yg.api.domain.common.dto.CommonDtoReq"
+            resultType="com.mrc.yg.api.domain.common.dto.CommonDto">
+        SELECT *
+        FROM COMMON
+        <where>
+            <if test="commonCode != null ">
+                and COMMON_CODE = #{commonCode}
+            </if>
+            <if test="mainCode != null ">
+                and mainCode = #{mainCode}
+            </if>
+            <if test="subCode != null ">
+                and subCode = #{subCode}
+            </if>
+        </where>
+    </select>
+    <insert id="insert" keyProperty="commonCode" parameterType="com.mrc.yg.api.domain.common.dto.CommonDto">
+        INSERT INTO COMMON
+        (
+            COMMON_CODE, MAIN_CODE, SUB_CODE,      NAME,      ORDER_SEQ,
+            REF_DATA1,   REF_DATA2, REF_DATA3,     REF_DATA4, HIDE,
+            INSERT_CODE, INSERT_DATE, UPDATE_CODE, UPDATE_DATE
+        )
+        SELECT #{commonCode}, #{mainCode}, #{subCode},  #{name},     #{orderSeq},
+               #{refData1},   #{refData2}, #{refData3}, #{refData4}, #{hide},
+               #{insertCode},  current_timestamp(), #{updateCode},  current_timestamp()
+        <selectKey resultType="long"  keyProperty="commonCode" order="AFTER">
+            SELECT LAST_INSERT_ID() as commonCode;
+        </selectKey>
+    </insert>
+
+    <update id="update"  parameterType="com.mrc.yg.api.domain.common.dto.CommonDto">
+         UPDATE COMMON
+            SET MAIN_CODE = #{mainCode}
+                SUB_CODE  = #{subCode}
+                NAME      = #{name}
+                ORDER_SEQ = #{orderSeq}
+                REF_DATA1 = #{refData1}
+                REF_DATA2 = #{refData2}
+                REF_DATA3 = #{refData3}
+                REF_DATA4 = #{refData4}
+                HIDE      = #{hide}
+                INSERT_CODE    = #{insertCode},
+                INSERT_DATE    = current_timestamp(),
+                UPDATE_CODE    = #{updateCode},
+                UPDATE_DATE    = current_timestamp()
+        WHERE COMMON_CODE  = #{commonCode}
+    </update>
+    <delete id="delete"  parameterType="com.mrc.yg.api.domain.common.dto.CommonDto">
+        DELETE COMMON
+        <where>
+            <if test="commonCode == null and mainCode = null and subCode = null  ">
+                and 1=0
+            </if>
+            <if test="commonCode != null ">
+                and COMMON_CODE = #{commonCode}
+            </if>
+            <if test="mainCode != null ">
+                and MAIN_CODE = #{mainCode}
+            </if>
+            <if test="subCode != null ">
+                and SUB_CODE = #{subCode}
+            </if>
+        </where>
+    </delete>
+</mapper>

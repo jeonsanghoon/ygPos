@@ -1,6 +1,7 @@
 package com.mrc.yg.api.domain.device.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import java.io.Serializable;
@@ -11,13 +12,14 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class DeviceDto implements Serializable {
-    private	long	deviceCode;
+    private	long deviceCode;
     private	String	deviceSn;
     private	String	deviceName;
     private	String	Address;
     private	String	addressDetail;
     private	Boolean	isActive;
-
+    private Double latitude;
+    private Double longitude;
     private	String remark;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime login_time = LocalDateTime.now();

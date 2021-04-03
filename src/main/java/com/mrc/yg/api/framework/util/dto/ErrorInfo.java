@@ -1,10 +1,10 @@
-package com.mrc.yg.api.util.dto;
+package com.mrc.yg.api.framework.util.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
+
 public class ErrorInfo {
     private int errorCode;
     private String errorMessage;

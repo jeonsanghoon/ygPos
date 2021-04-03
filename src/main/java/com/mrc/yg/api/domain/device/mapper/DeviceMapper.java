@@ -9,4 +9,7 @@ import java.util.List;
 @Mapper
 public interface DeviceMapper {
     List<DeviceDto> getList(DeviceDtoReq req);
+    void insert(DeviceDto data);
+    void update(DeviceDto data);
+    void delete(DeviceDto data);
 }
