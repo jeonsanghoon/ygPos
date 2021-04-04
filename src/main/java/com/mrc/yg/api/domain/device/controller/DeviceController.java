@@ -27,10 +27,9 @@ public class DeviceController implements BaseController<DeviceDtoReq, DeviceDto>
 
     @ApiOperation(value = "기기 조회", notes = "기기 조회입니다.")
     @PostMapping("/getList")
-    @ResponseBody
     @Override
     public RtnData<List<DeviceDto>> getList(@RequestBody DeviceDtoReq req) {
-        log.info(req.toString());
+        log.info("/v1/device/getList Request >>> " + req.toString());
         return service.getList(req);
     }
 
@@ -38,6 +37,7 @@ public class DeviceController implements BaseController<DeviceDtoReq, DeviceDto>
     @PostMapping("/save")
     @Override
     public RtnData<String> save(@RequestBody DeviceDto data) {
+        log.info("/v1/device/save Request >>> " + data.toString());
         return service.insert(data);
     }
 
@@ -45,6 +45,7 @@ public class DeviceController implements BaseController<DeviceDtoReq, DeviceDto>
     @PostMapping("/update")
     @Override
     public RtnData<String> update(@RequestBody DeviceDto data) {
+        log.info("/v1/device/update Request >>> " + data.toString());
         return service.update(data);
     }
 
@@ -52,6 +53,7 @@ public class DeviceController implements BaseController<DeviceDtoReq, DeviceDto>
     @PostMapping("/delete")
     @Override
     public RtnData<String> delete(@RequestBody DeviceDto data) {
+        log.info("/v1/device/delete Request >>> " + data.toString());
         return service.delete(data);
     }
 }

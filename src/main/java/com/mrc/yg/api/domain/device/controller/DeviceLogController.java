@@ -29,7 +29,7 @@ public class DeviceLogController implements BaseController<DeviceLogDtoReq, Devi
     @PostMapping("/getList")
     @Override
     public RtnData<List<DeviceLogDto>> getList(@RequestBody DeviceLogDtoReq req) {
-        log.info(req.toString());
+        log.info("/v1/device/log/getList Request >>> " + req.toString());
         return service.getList(req);
     }
 
@@ -37,6 +37,7 @@ public class DeviceLogController implements BaseController<DeviceLogDtoReq, Devi
     @PostMapping("/save")
     @Override
     public RtnData<String> save(@RequestBody DeviceLogDto data) {
+        log.info("/v1/device/log/save Request >>> " + data.toString());
         return service.insert(data);
     }
 
@@ -44,6 +45,7 @@ public class DeviceLogController implements BaseController<DeviceLogDtoReq, Devi
     @PostMapping("/update")
     @Override
     public RtnData<String> update(@RequestBody DeviceLogDto data) {
+        log.info("/v1/device/log/update Request >>> " + data.toString());
         return service.update(data);
     }
 
@@ -51,6 +53,7 @@ public class DeviceLogController implements BaseController<DeviceLogDtoReq, Devi
     @PostMapping("/delete")
     @Override
     public RtnData<String> delete(@RequestBody DeviceLogDto data) {
+        log.info("/v1/device/log/delete Request >>> " + data.toString());
         return service.delete(data);
     }
 }

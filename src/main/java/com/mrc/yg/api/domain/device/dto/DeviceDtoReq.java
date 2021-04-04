@@ -9,7 +9,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class DeviceDtoReq implements Serializable {
-    private	String deviceCode;
+    private	Long deviceCode;
     private	String deviceName;
     private	String deviceSn;
     private	Boolean isActive;

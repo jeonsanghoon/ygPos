@@ -102,7 +102,7 @@ public class MemberServiceImpl implements MemberService<MemberDtoReq, MemberDto>
         if(list.size() != 1) throw new UserException(-1, "아이디가 잘못되었습니다.");
         member = list.get(0);
         if(!StringUtils.hasText(req.getMemberPw()))  throw new UserException(-2, "암호가 입력되지 않았습니다.");
-        if( member.getMemberPw() != Global.getSecurityInfo().encryptSHA256(req.getMemberPw())) throw new UserException(-3, "암호가 잘못 입력되었습니다.");
-        rtn.setData(jwtTokenProvider.createToken(member.getMemberId(), member.getAuthTypeName()));
+        if(!member.getMemberPw().toUpperCase().equals(Global.getSecurityInfo().encryptSHA256(req.getMemberPw()).toUpperCase())) throw new UserException(-3, "암호가 잘못 입력되었습니다.");
+        rtn.setData(jwtTokenProvider.createToken(member.getMemberId(),"USER"));
     }
 }

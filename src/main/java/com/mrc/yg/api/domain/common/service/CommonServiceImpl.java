@@ -3,13 +3,14 @@ package com.mrc.yg.api.domain.common.service;
 import com.mrc.yg.api.domain.common.dto.CommonDto;
 import com.mrc.yg.api.domain.common.dto.CommonDtoReq;
 import com.mrc.yg.api.domain.common.mapper.CommonMapper;
-
 import com.mrc.yg.api.framework.util.dto.RtnData;
 import com.mrc.yg.api.framework.util.dto.RtnType;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Service
 public class CommonServiceImpl implements CommonService<CommonDtoReq, CommonDto> {
     private final CommonMapper mapper;
 

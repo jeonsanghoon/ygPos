@@ -27,7 +27,9 @@ public class SwaggerConfiguration {
                 //.paths(PathSelectors.any())
                 .paths(PathSelectors.ant("/v1/**"))
                 .build()
-                .useDefaultResponseMessages(false); // 기본으로 세팅되는 200,401,403,404 메시지를 표시 하지 않음
+                .useDefaultResponseMessages(false) // 기본으로 세팅되는 200,401,403,404 메시지를 표시 하지 않음
+                .securityContexts(Arrays.asList(securityContext()))
+                .securitySchemes(Arrays.asList(apiKey()));
     }
 
     private ApiInfo swaggerInfo() {
