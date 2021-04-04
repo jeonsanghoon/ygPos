@@ -3,13 +3,18 @@ package com.mrc.yg.api.domain.member.controller;
 import com.mrc.yg.api.domain.member.service.MemberService;
 import com.mrc.yg.api.framework.base.BaseController;
 
+import com.mrc.yg.api.framework.jwt.JwtTokenProvider;
+import com.mrc.yg.api.framework.util.Global;
 import com.mrc.yg.api.framework.util.dto.RtnData;
 import com.mrc.yg.api.domain.member.dto.MemberDto;
 import com.mrc.yg.api.domain.member.dto.MemberDtoReq;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Member;
 import java.util.List;
 
 @Api(tags = "회원")
@@ -17,6 +22,7 @@ import java.util.List;
 @RestController
 public class MemberController implements BaseController<MemberDtoReq,MemberDto> {
     private final MemberService<MemberDtoReq, MemberDto> service;
+
     public MemberController(MemberService<MemberDtoReq, MemberDto> service) {
         this.service = service;
     }
@@ -27,6 +33,15 @@ public class MemberController implements BaseController<MemberDtoReq,MemberDto> 
     public RtnData<List<MemberDto>> getList(@RequestBody MemberDtoReq req) {
         return service.getList(req);
     }
+
+
+    @ApiOperation(value = "회원 로그인", notes = "회원 로그인입니다.")
+    @PostMapping("/login")
+    public RtnData<String> login(@RequestBody MemberDtoReq req) {
+        return service.login(req);
+    }
+
+
 
     @ApiOperation(value = "회원 저장", notes = "회원 저장입니다.")
     @PostMapping("/save")

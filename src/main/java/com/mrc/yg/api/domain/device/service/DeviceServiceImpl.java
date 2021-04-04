@@ -3,9 +3,12 @@ package com.mrc.yg.api.domain.device.service;
 import com.mrc.yg.api.domain.device.dto.DeviceDto;
 import com.mrc.yg.api.domain.device.dto.DeviceDtoReq;
 import com.mrc.yg.api.domain.device.mapper.DeviceMapper;
+import com.mrc.yg.api.framework.util.Global;
 import com.mrc.yg.api.framework.util.dto.RtnData;
 import com.mrc.yg.api.framework.util.dto.RtnType;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -19,6 +22,18 @@ public class DeviceServiceImpl implements DeviceService<DeviceDtoReq, DeviceDto>
         this.deviceMapper = deviceMapper;
     }
 
+    @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Override
+    public RtnData<List<DeviceDto>> getList(DeviceDtoReq deviceDtoReq) {
+        RtnData<List<DeviceDto>> rtn = new RtnData<>();
+        try {
+            rtn.setData(deviceMapper.getList(deviceDtoReq));
+        }catch(Exception e){
+            Global.getDataInfo().makeException(rtn,e);
+        }
+        return rtn;
+    }
+
     @Transactional
     @Override
     public RtnData<String> insert(DeviceDto data) {
@@ -28,22 +43,7 @@ public class DeviceServiceImpl implements DeviceService<DeviceDtoReq, DeviceDto>
             rtn.setData("저장에 성공하였습니다.");
 
         }catch(Exception e){
-            rtn.setRtnType(RtnType.ERROR);
-            rtn.getErrorInfo().setErrorCode(-1);
-            rtn.getErrorInfo().setErrorMessage(e.getMessage());
-        }
-        return rtn;
-    }
-
-    @Override
-    public RtnData<List<DeviceDto>> getList(DeviceDtoReq deviceDtoReq) {
-        RtnData<List<DeviceDto>> rtn = new RtnData<>();
-        try {
-           rtn.setData(deviceMapper.getList(deviceDtoReq));
-        }catch(Exception e){
-            rtn.setRtnType(RtnType.ERROR);
-            rtn.getErrorInfo().setErrorCode(-1);
-            rtn.getErrorInfo().setErrorMessage(e.getMessage());
+            Global.getDataInfo().makeException(rtn,e);
         }
         return rtn;
     }
@@ -55,14 +55,12 @@ public class DeviceServiceImpl implements DeviceService<DeviceDtoReq, DeviceDto>
         try {
             deviceMapper.update(data);
             rtn.setData("수정에 성공하였습니다.");
-
         }catch(Exception e){
-            rtn.setRtnType(RtnType.ERROR);
-            rtn.getErrorInfo().setErrorCode(-1);
-            rtn.getErrorInfo().setErrorMessage(e.getMessage());
+            Global.getDataInfo().makeException(rtn,e);
         }
         return rtn;
     }
+
 
     @Transactional
     @Override
@@ -71,14 +69,9 @@ public class DeviceServiceImpl implements DeviceService<DeviceDtoReq, DeviceDto>
         try {
             deviceMapper.delete(data);
             rtn.setData("삭제에 성공하였습니다.");
-
         }catch(Exception e){
-            rtn.setRtnType(RtnType.ERROR);
-            rtn.getErrorInfo().setErrorCode(-1);
-            rtn.getErrorInfo().setErrorMessage(e.getMessage());
+            Global.getDataInfo().makeException(rtn,e);
         }
         return rtn;
     }
-
-
 }

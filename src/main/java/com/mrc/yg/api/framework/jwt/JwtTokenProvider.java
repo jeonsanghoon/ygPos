@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
@@ -38,6 +39,11 @@ public class JwtTokenProvider { // JWT 토큰을 생성 및 검증 모듈
     }
 
     // Jwt 토큰 생성
+    public String createToken(String memberId, String role) {
+        List<String> roles = new ArrayList<>();
+        roles.add(role);
+        return createToken(memberId, roles);
+    }
     public String createToken(String memberId, List<String> roles) {
         Claims claims = Jwts.claims().setSubject(memberId);
         claims.put("roles", roles);

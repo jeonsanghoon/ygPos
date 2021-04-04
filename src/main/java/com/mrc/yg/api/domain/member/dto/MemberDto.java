@@ -23,12 +23,13 @@ public class MemberDto implements Serializable {
     private String nickname;
     @JsonIgnore
     private String memberPw;
-    private String memberPwReg;
     @Builder.Default
     private Integer authType = 30;
     private String authTypeName;
     private String birthDate;
     private String phone;
+    private String token;
+
     @Builder.Default
     private Boolean hide = false;
     private int insertCode;

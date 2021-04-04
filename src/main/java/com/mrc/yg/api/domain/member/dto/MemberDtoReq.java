@@ -9,4 +9,5 @@ public class MemberDtoReq {
     private Integer memberCode;
     private String memberId;
     private String memberName;
+    private String memberPw;
 }
