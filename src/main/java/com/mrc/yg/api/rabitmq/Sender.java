@@ -5,9 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.amqp.core.FanoutExchange;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,7 +20,7 @@ public class Sender {
     AtomicInteger count = new AtomicInteger(0);
 
     // 앱이 실행되는 동안 10초 마다 메시지를 보낸다.
-    @Scheduled(fixedDelay = 1000, initialDelay = 500)
+ //   @Scheduled(fixedDelay = 1000, initialDelay = 500)
     public void send() throws JsonProcessingException {
         // 메시지 모델 조립
         EventPayload eventPayload = new EventPayload();

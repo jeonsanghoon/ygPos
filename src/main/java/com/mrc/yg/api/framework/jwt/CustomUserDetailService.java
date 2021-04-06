@@ -4,7 +4,6 @@ package com.mrc.yg.api.framework.jwt;
 import com.mrc.yg.api.domain.member.dto.MemberDto;
 import com.mrc.yg.api.domain.member.dto.MemberDtoReq;
 import com.mrc.yg.api.domain.member.service.MemberService;
-import com.mrc.yg.api.framework.common.exception.UserException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -22,13 +21,15 @@ public class CustomUserDetailService implements UserDetailsService {
 
     private final MemberService<MemberDtoReq, MemberDto> memberService;
 
-    public UserDetails loadUserByUsername(String memberId) {
+    public UserDetails loadUserByUsername(String memberCode) {
         MemberDtoReq req = new MemberDtoReq();
-        req.setMemberId(memberId);
+        req.setMemberCode(Integer.parseInt(memberCode));
         MemberDto member =  memberService.getList(req).getData().get(0);
 
         List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority(member.getMemberName()));
+        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
         return new User(member.getMemberId(), member.getMemberPw(), authorities);
     }
+
+
 }

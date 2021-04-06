@@ -6,6 +6,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -28,9 +29,10 @@ import java.util.List;
 public class JwtTokenProvider { // JWT 토큰을 생성 및 검증 모듈
 
     @Value("spring.jwt.secret")
+    @Getter
     private String secretKey;
 
-    private long tokenValidMilisecond = 1000L * 60 * 60 * 24; // 1시간만 토큰 유효
+    private long tokenValidMilisecond = 1000L * 60 * 60 * 24 * 7; // 일주일만 토큰 유효
 
     private final UserDetailsService userDetailsService;
     private final Log log = LogFactory.getLog(getClass());
@@ -39,17 +41,14 @@ public class JwtTokenProvider { // JWT 토큰을 생성 및 검증 모듈
         secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
     }
 
-    public String getSecretKey(){
-        return secretKey;
-    }
     // Jwt 토 큰 생성
-    public String createToken(String memberId, String role) {
+    public String createToken(String userPk, String role) {
         List<String> roles = new ArrayList<>();
         roles.add(role);
-        return createToken(memberId, roles);
+        return createToken(userPk, roles);
     }
-    public String createToken(String memberId, List<String> roles) {
-        Claims claims = Jwts.claims().setSubject(memberId);
+    public String createToken(String userPk, List<String> roles) {
+        Claims claims = Jwts.claims().setSubject(userPk);
         claims.put("roles", roles);
         Date now = new Date();
         String jwtToken =  Jwts.builder()
@@ -70,7 +69,8 @@ public class JwtTokenProvider { // JWT 토큰을 생성 및 검증 모듈
 
     // Jwt 토큰에서 회원 구별 정보 추출
     public String getUserPk(String token) {
-        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
+        String userPk = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
+        return userPk;
     }
 
     // Request의 Header에서 token 파싱 : "X-AUTH-TOKEN: jwt토큰"
