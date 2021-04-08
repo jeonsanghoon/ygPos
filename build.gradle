@@ -47,10 +47,14 @@ dependencies {
 
 	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-amqp
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-amqp', version: '2.4.4'
+	implementation 'com.fasterxml.jackson.core:jackson-databind'
 
 	// jwt 적용
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'io.jsonwebtoken:jjwt:0.9.1'
+
+
+
 
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
